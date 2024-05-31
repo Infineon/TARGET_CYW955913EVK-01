@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration app="BACKEND" formatVersion="14" lastSavedWith="Configurator Backend" lastSavedWithVersion="3.20.0" toolsPackage="ModusToolbox 3.2.0" xmlns="http://cypress.com/xsd/cydesignfile_v5">
+    <Devices>
+        <Device mpn="CYW55913IUBGT">
+            <BlockConfig>
+                <Block location="ioss[0].port[0].pin[0]">
+                    <Aliases>
+                        <Alias value="CYBSP_D6"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[0].pin[1]">
+                    <Aliases>
+                        <Alias value="CYBSP_D9"/>
+                        <Alias value="CYBSP_ALS_INT"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[0].pin[2]">
+                    <Aliases>
+                        <Alias value="CYBSP_D2"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[0].pin[3]">
+                    <Aliases>
+                        <Alias value="CYBSP_D4"/>
+                        <Alias value="CYBSP_USER_BTN"/>
+                        <Alias value="CYBSP_USER_BTN1"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[0].pin[4]">
+                    <Aliases>
+                        <Alias value="CYBSP_D7"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[0].pin[5]">
+                    <Aliases>
+                        <Alias value="CYBSP_I2C_SDA"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[0].pin[6]">
+                    <Aliases>
+                        <Alias value="CYBSP_I2C_SCL"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[0].pin[15]">
+                    <Aliases>
+                        <Alias value="CYBSP_D10"/>
+                        <Alias value="CYBSP_USER_LED"/>
+                        <Alias value="CYBSP_USER_LED1"/>
+                        <Alias value="CYBSP_SPI_CS"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[0].pin[16]">
+                    <Aliases>
+                        <Alias value="CYBSP_D13"/>
+                        <Alias value="CYBSP_USER_LED2"/>
+                        <Alias value="CYBSP_SPI_CLK"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[0].pin[17]">
+                    <Aliases>
+                        <Alias value="CYBSP_BT_HOST_WAKE"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[2].pin[22]">
+                    <Aliases>
+                        <Alias value="CYBSP_WIFI_DEV_WAKE"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[2].pin[23]">
+                    <Aliases>
+                        <Alias value="CYBSP_BT_DEV_WAKE"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[2].pin[24]">
+                    <Aliases>
+                        <Alias value="CYBSP_D1"/>
+                        <Alias value="CYBSP_DEBUG_UART_TX"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[2].pin[25]">
+                    <Aliases>
+                        <Alias value="CYBSP_D0"/>
+                        <Alias value="CYBSP_DEBUG_UART_RX"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[2].pin[26]">
+                    <Aliases>
+                        <Alias value="CYBSP_A0"/>
+                        <Alias value="CYBSP_DEBUG_UART_CTS"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[2].pin[27]">
+                    <Aliases>
+                        <Alias value="CYBSP_A1"/>
+                        <Alias value="CYBSP_DEBUG_UART_RTS"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[2].pin[28]">
+                    <Aliases>
+                        <Alias value="CYBSP_D5"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[2].pin[30]">
+                    <Aliases>
+                        <Alias value="CYBSP_D11"/>
+                        <Alias value="CYBSP_A2"/>
+                        <Alias value="CYBSP_SPI_MOSI"/>
+                        <Alias value="CYBSP_POT"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[2].pin[31]">
+                    <Aliases>
+                        <Alias value="CYBSP_D12"/>
+                        <Alias value="CYBSP_A3"/>
+                        <Alias value="CYBSP_SPI_MISO"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[3].pin[18]">
+                    <Aliases>
+                        <Alias value="CYBSP_BT_UART_CTS"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[3].pin[19]">
+                    <Aliases>
+                        <Alias value="CYBSP_BT_UART_RTS"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[3].pin[20]">
+                    <Aliases>
+                        <Alias value="CYBSP_BT_UART_RX"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[3].pin[21]">
+                    <Aliases>
+                        <Alias value="CYBSP_BT_UART_TX"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[3].pin[22]">
+                    <Aliases>
+                        <Alias value="CYBSP_DMIC_CK"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[3].pin[23]">
+                    <Aliases>
+                        <Alias value="CYBSP_DMIC_DQ"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[3].pin[32]">
+                    <Aliases>
+                        <Alias value="CYBSP_TDM1_DI"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[3].pin[33]">
+                    <Aliases>
+                        <Alias value="CYBSP_TDM1_DO"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[3].pin[34]">
+                    <Aliases>
+                        <Alias value="CYBSP_TDM1_MCK"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[3].pin[35]">
+                    <Aliases>
+                        <Alias value="CYBSP_TDM1_SCK"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[3].pin[36]">
+                    <Aliases>
+                        <Alias value="CYBSP_TDM1_WS"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[3].pin[37]">
+                    <Aliases>
+                        <Alias value="CYBSP_TDM2_SCK"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[3].pin[38]">
+                    <Aliases>
+                        <Alias value="CYBSP_TDM2_DI"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[3].pin[39]">
+                    <Aliases>
+                        <Alias value="CYBSP_TDM2_MCK"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[3].pin[40]">
+                    <Aliases>
+                        <Alias value="CYBSP_TDM2_DO"/>
+                    </Aliases>
+                </Block>
+                <Block location="ioss[0].port[3].pin[41]">
+                    <Aliases>
+                        <Alias value="CYBSP_TDM2_WS"/>
+                    </Aliases>
+                </Block>
+            </BlockConfig>
+            <Netlist/>
+        </Device>
+    </Devices>
+</Configuration>
