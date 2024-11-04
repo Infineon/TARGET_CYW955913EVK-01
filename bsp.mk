@@ -47,6 +47,14 @@ else
 BSP_COMPONENTS+=CM
 endif
 
+# App preferred execution memory
+# use flash, psram, or ram
+APPEXEC?=flash
+
+# linker script template
+BSP_LINKER_SCRIPT_PATH=$(MTB_TOOLS__TARGET_DIR)/TOOLCHAIN_$(TOOLCHAIN)
+BSP_LINKER_SCRIPT=$(BSP_LINKER_SCRIPT_PATH)/$(CHIP_NAME)_$(APPEXEC).$(MTB_RECIPE__SUFFIX_LS)
+
 # Select between the shared and dedicated LNA / ANT paths. 
 # The three options are SLNA_ANT0, DLNA_BTANT and DLNA_ANT0.
 CHIP_ANT_SEL:=SLNA_ANT0

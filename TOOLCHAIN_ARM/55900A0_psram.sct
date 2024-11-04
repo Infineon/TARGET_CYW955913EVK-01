@@ -1,0 +1,86 @@
+#! armclang -E  --target=arm-arm-none-eabi -x c -mcpu=cortex-m33
+; The first line specifies a preprocessor command that the linker invokes
+; to pass a scatter file through a C preprocessor.
+
+; This linker script template builds code/rodata in PSRAM except .cy_ramfunc and .cy_xip* sections
+;
+; The template makes use of preprocessor values passed on the linker command line
+; Example:
+;   MTB_LINKSYM_PRE_INIT_CFG:    location of firmware pointer to pre_init_cfg structure defined in spar_sdetup.c
+;   MTB_LINKSYM_APP_SRAM_START:  start address of application in static RAM
+;   MTB_LINKSYM_APP_SRAM_LENGTH: length of memory region for application in RAM, including HEAP
+;   MTB_LINKSYM_APP_HEAP_SIZE:   number of bytes in HEAP
+;   MTB_LINKSYM_APP_PSRAM_START: start address of application in PSRAM, configured as 0x02800000
+;   MTB_LINKSYM_APP_PSRAM_LENGTH:number of bytes of application memory in PSRAM
+;   MTB_LINKSYM_APP_XIP_START:   start address of application eXecute-In-Place in flash
+;   MTB_LINKSYM_APP_XIP_LENGTH:  number of bytes available for flash XIP
+
+RAM_PRE_INIT MTB_LINKSYM_PRE_INIT_CFG 0x4
+{
+	PRE_INIT_CFG +0 ALIGN 4
+	{
+		*(.pre_init_cfg)
+	}
+
+}
+
+RAM MTB_LINKSYM_APP_SRAM_START MTB_LINKSYM_APP_SRAM_LENGTH
+{
+	APP_ENTRY +0
+	{
+		*(.app_entry)
+		*spar_setup.o(+RO)
+	}
+
+	TEXT +0
+	{
+		*(.text_in_ram)
+		*(.cy_ramfunc)
+		; DO NOT EDIT: add module select patterns for *.o to be located in RAM below
+	}
+
+	DATA +0
+	{
+		* (+RW)
+	}
+
+	BSS +0 ALIGN 4
+	{
+		* (+ZI)
+	}
+
+	HEAP +0 ALIGN 8 EMPTY MTB_LINKSYM_APP_HEAP_SIZE
+	{
+	}
+
+	NOINIT +0 UNINIT
+	{
+		*(.noinit)
+	}
+
+}
+
+PSRAM MTB_LINKSYM_APP_PSRAM_START MTB_LINKSYM_APP_PSRAM_LENGTH
+{
+	PSRAM MTB_LINKSYM_APP_PSRAM_START ALIGN 32
+	{
+		*(.cy_psram_func)
+		* (+RO)
+	}
+	PSRAM_DATA +0 ALIGN 32
+	{
+		*(.cy_psram_data)
+	}
+}
+
+XIP MTB_LINKSYM_APP_XIP_START MTB_LINKSYM_APP_XIP_LENGTH
+{
+	APP_XIP_AREA +12 ALIGN 4 ; critical to leave 12 bytes space for XIP record header
+	{
+		*(.cy_xip)
+		*(.cy_xip.*)
+		*(.cy_xip_data)
+		*(.cy_xip_data.*)
+	}
+
+}

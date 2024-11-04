@@ -12,6 +12,9 @@ The CYW955913EVK-01 library includes the following:
 * API documentation
 
 ### What Changed?
+#### v1.0.1
+* Added preferred execution memory selector.
+* Included linker script files for different memory targets. 
 #### v1.0.0
 * Initial release.
 

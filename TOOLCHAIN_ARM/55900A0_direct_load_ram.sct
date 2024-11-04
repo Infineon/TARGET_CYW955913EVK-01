@@ -1,0 +1,56 @@
+#! armclang -E  --target=arm-arm-none-eabi -x c -mcpu=cortex-m33
+; The first line specifies a preprocessor command that the linker invokes
+; to pass a scatter file through a C preprocessor.
+; This generated linker script template builds
+; The template makes use of preprocessor values passed on the linker command line
+
+; Example:
+;   MTB_LINKSYM_PRE_INIT_CFG:    location of firmware pointer to pre_init_cfg structure defined in spar_sdetup.c
+;   MTB_LINKSYM_APP_SRAM_START:  start address of application in static RAM
+;   MTB_LINKSYM_APP_SRAM_LENGTH: length of memory region for application in RAM, including HEAP
+;   MTB_LINKSYM_APP_HEAP_SIZE:   number of bytes in HEAP
+
+RAM_PRE_INIT MTB_LINKSYM_PRE_INIT_CFG 4
+{
+	PRE_INIT_CFG +0 ALIGN 4
+	{
+		*(.pre_init_cfg)
+	}
+
+}
+
+RAM MTB_LINKSYM_APP_SRAM_START MTB_LINKSYM_APP_SRAM_LENGTH
+{
+	APP_ENTRY +0
+	{
+		*(.app_entry)
+		*spar_setup.o(+RO)
+	}
+
+	TEXT +0
+	{
+		*(.text_in_ram)
+		*(.cy_ramfunc)
+		* (+RO)
+	}
+
+	DATA +0
+	{
+		* (+RW)
+	}
+
+	BSS +0 ALIGN 4
+	{
+		* (+ZI)
+	}
+
+	HEAP +0 ALIGN 8 EMPTY MTB_LINKSYM_APP_HEAP_SIZE
+	{
+	}
+
+	NOINIT +0 ALIGN 8 UNINIT
+	{
+		*(.noinit)
+	}
+
+}
