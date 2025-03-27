@@ -12,6 +12,8 @@ The CYW955913EVK-01 library includes the following:
 * API documentation
 
 ### What Changed?
+#### v2.0.0
+Updated dependencies for mtb-hal-cat5 and mtb-pdl-cat5.
 #### v1.0.1
 * Added preferred execution memory selector.
 * Included linker script files for different memory targets. 
@@ -39,4 +41,4 @@ Minimum required ModusToolbox™ Software Environment: v3.1.0
 [api]: https://infineon.github.io/TARGET_CYW955913EVK-01/html/modules.html
 
 ---
-© Cypress Semiconductor Corporation (an Infineon company) or an affiliate of Cypress Semiconductor Corporation, 2019-2022.
+© Cypress Semiconductor Corporation (an Infineon company) or an affiliate of Cypress Semiconductor Corporation, 2019-2025.
