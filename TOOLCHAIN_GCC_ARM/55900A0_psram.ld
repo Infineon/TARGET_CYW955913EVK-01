@@ -18,10 +18,10 @@ GROUP(-lgcc -lc -lnosys -lstdc++ -lm)
  */
 MEMORY
 {
-	xip (rx) : ORIGIN = MTB_LINKSYM_APP_XIP_START, LENGTH = MTB_LINKSYM_APP_XIP_LENGTH
-	psram (rwx) : ORIGIN = MTB_LINKSYM_APP_PSRAM_START, LENGTH = MTB_LINKSYM_APP_PSRAM_LENGTH
 	ram_pre_init (r) : ORIGIN = MTB_LINKSYM_PRE_INIT_CFG, LENGTH = 0x4
 	ram (rwx) : ORIGIN = MTB_LINKSYM_APP_SRAM_START, LENGTH = MTB_LINKSYM_APP_SRAM_LENGTH
+	psram (rwx) : ORIGIN = MTB_LINKSYM_APP_PSRAM_START, LENGTH = MTB_LINKSYM_APP_PSRAM_LENGTH
+	xip (rx) : ORIGIN = MTB_LINKSYM_APP_XIP_START, LENGTH = MTB_LINKSYM_APP_XIP_LENGTH
 }
 
 SECTIONS
@@ -137,15 +137,12 @@ SECTIONS
 		*(.dtors)
 		*(.text_in_ram)
 		*(.cy_ramfunc)
+		*libgcc.a:(.text)
+		*libgcc.a:(.text.*)
+		*libgcc.a:(.ARM.exidx.text.*)
 		/* DO NOT EDIT: add module select patterns for *.o to be located in RAM below */
 		app_text_end = .;
 	} >ram
-
-	app_iram_length = app_text_end - app_iram_bss_begin;
-	app_iram_data_begin = app_iram_bss_end;
-	app_iram_data_length = app_text_end - app_iram_data_begin;
-	app_irom_data_begin = app_iram_data_begin;
-	app_iram_bss_length = app_iram_bss_end - app_iram_bss_begin;
 
 	.psram MTB_LINKSYM_APP_PSRAM_START : ALIGN(32)
 	{
@@ -185,4 +182,10 @@ SECTIONS
 		KEEP(*(.cy_xip_data.*))
 		app_xip_area_end = .;
 	} >xip
+
+	app_iram_length = app_text_end - app_iram_bss_begin;
+	app_iram_data_begin = app_iram_bss_end;
+	app_iram_data_length = app_text_end - app_iram_data_begin;
+	app_irom_data_begin = app_iram_data_begin;
+	app_iram_bss_length = app_iram_bss_end - app_iram_bss_begin;
 }

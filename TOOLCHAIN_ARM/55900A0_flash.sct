@@ -36,7 +36,7 @@ RAM MTB_LINKSYM_APP_SRAM_START MTB_LINKSYM_APP_SRAM_LENGTH
 	{
 		*(.text_in_ram)
 		*(.cy_ramfunc)
-        ; DO NOT EDIT: add module select patterns for *.o to be located in RAM below
+		; DO NOT EDIT: add module select patterns for *.o to be located in RAM below
 	}
 
 	DATA +0
@@ -53,7 +53,7 @@ RAM MTB_LINKSYM_APP_SRAM_START MTB_LINKSYM_APP_SRAM_LENGTH
 	{
 	}
 
-	NOINIT +0 UNINIT
+	NOINIT +0 ALIGN 8 UNINIT
 	{
 		*(.noinit)
 	}

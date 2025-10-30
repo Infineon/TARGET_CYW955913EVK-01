@@ -3,27 +3,22 @@ SEARCH_DIR(.)
 GROUP(-lgcc -lc -lnosys -lstdc++ -lm)
 
 
-/* This linker script template builds code/rodata in XIP except .cy_ramfunc and .cy_psram_* sections
- *
- * The template makes use of preprocessor values passed on the linker command line
- * Example:
- *   MTB_LINKSYM_PRE_INIT_CFG:    location of firmware pointer to pre_init_cfg structure defined in spar_sdetup.c
- *   MTB_LINKSYM_APP_SRAM_START:  start address of application in static RAM
- *   MTB_LINKSYM_APP_SRAM_LENGTH: length of memory region for application in RAM, including HEAP
- *   MTB_LINKSYM_APP_HEAP_SIZE:   number of bytes in HEAP
- *   MTB_LINKSYM_APP_PSRAM_START: start address of application in PSRAM, configured as 0x02800000
- *   MTB_LINKSYM_APP_PSRAM_LENGTH:number of bytes of application memory in PSRAM
- *   MTB_LINKSYM_APP_XIP_START:   start address of application eXecute-In-Place in flash
- *   MTB_LINKSYM_APP_XIP_LENGTH:  number of bytes available for flash XIP
- */
+/* This generated linker script template builds  */
+/* The template makes use of preprocessor values passed on the linker command line */
+
+/* Example: */
+/*   MTB_LINKSYM_PRE_INIT_CFG:    location of firmware pointer to pre_init_cfg structure defined in spar_sdetup.c */
+/*   MTB_LINKSYM_APP_SRAM_START:  start address of application in static RAM */
+/*   MTB_LINKSYM_APP_SRAM_LENGTH: length of memory region for application in RAM, including HEAP */
+/*   MTB_LINKSYM_APP_HEAP_SIZE:   number of bytes in HEAP */
+
+
 
 MEMORY
 {
-	ram_pre_init (r) : ORIGIN = MTB_LINKSYM_PRE_INIT_CFG, LENGTH = 0x4
+	ram_pre_init (r) : ORIGIN = MTB_LINKSYM_PRE_INIT_CFG, LENGTH = 4
 	ram (rwx) : ORIGIN = MTB_LINKSYM_APP_SRAM_START, LENGTH = MTB_LINKSYM_APP_SRAM_LENGTH
 	psram (rwx) : ORIGIN = MTB_LINKSYM_APP_PSRAM_START, LENGTH = MTB_LINKSYM_APP_PSRAM_LENGTH
-	xip (rx) : ORIGIN = MTB_LINKSYM_APP_XIP_START, LENGTH = MTB_LINKSYM_APP_XIP_LENGTH
-
 }
 
 SECTIONS
@@ -118,12 +113,6 @@ SECTIONS
 		app_entry_begin = .;
 		*(.app_entry)
 		app_entry_end = .;
-	} >ram
-
-	.text :
-	{
-		CREATE_OBJECT_SYMBOLS
-		app_text_block_start = .;
 		app_text_begin = .;
 		KEEP(*(.vectors))
 		. = ALIGN(4);
@@ -146,49 +135,38 @@ SECTIONS
 		app_text_end = .;
 	} >ram
 
-	.psram MTB_LINKSYM_APP_PSRAM_START : ALIGN(32)
+	.text :
 	{
 		CREATE_OBJECT_SYMBOLS
 		app_psram_block_start = .;
 		app_psram_begin = .;
 		*(.cy_psram_func)
-		. = ALIGN(32);
-		app_psram_data_begin = .;
-		KEEP(*(.cy_psram_data))
-		. = ALIGN(32);
-		app_psram_end = .;
-	} >psram
-
-	.app_xip_area MTB_LINKSYM_APP_XIP_START : ALIGN(4)
-	{
-		CREATE_OBJECT_SYMBOLS
-		app_xip_area_block_start = .;
-		. += 12;
-		app_xip_area_begin = .;
-		*(.cy_xip)
-		*(.cy_xip.*)
-		KEEP(*(.cy_xip_data))
-		KEEP(*(.cy_xip_data.*))
 		*(.text)
 		*(.text.*)
 		KEEP(*(.init))
 		KEEP(*(.fini))
 		*(.gnu.linkonce.t.*)
 		*(.emb_text)
-		*(.rodata)
-		*(.rodata.*)
-		*(.gnu.linkonce.r.*)
-		*(.constdata*)
 		*(.ARM.extab*)
 		*(.gnu.linkonce.armextab.*)
 		*(.ARM.exidx*)
 		*(.gnu.linkonce.armexidx.*)
-		app_xip_area_end = .;
-	} >xip
+		*(.rodata)
+		*(.rodata.*)
+		*(.constdata*)
+		*(.gnu.linkonce.r.*)
+		. = ALIGN(32);
+		app_psram_data_begin = .;
+		KEEP(*(.cy_psram_data))
+		KEEP(*(.cy_psram_data.*))
+		. = ALIGN(32);
+		app_psram_end = .;
+	} >psram
 
 	app_iram_length = app_text_end - app_iram_bss_begin;
 	app_iram_data_begin = app_iram_bss_end;
 	app_iram_data_length = app_text_end - app_iram_data_begin;
 	app_irom_data_begin = app_iram_data_begin;
 	app_iram_bss_length = app_iram_bss_end - app_iram_bss_begin;
+
 }

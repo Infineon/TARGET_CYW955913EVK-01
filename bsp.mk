@@ -35,8 +35,8 @@ endif
 
 LIFE_CYCLE_STATE?=DM
 
-#Flash build
-DIRECT_LOAD=0
+#0 -> Flash build, 1 -> SRAM build, 2 -> PSRAM build 
+DIRECT_LOAD?=0
 
 BSP_COMPONENTS:=CYW955913SDCM2WLIPA
 
@@ -48,7 +48,7 @@ BSP_COMPONENTS+=CM
 endif
 
 # App preferred execution memory
-# use flash, psram, or ram
+# use flash, psram, or ram for DIRECT_LOAD=0
 APPEXEC?=flash
 
 # linker script template
@@ -60,7 +60,10 @@ BSP_LINKER_SCRIPT=$(BSP_LINKER_SCRIPT_PATH)/$(CHIP_NAME)_$(APPEXEC).$(MTB_RECIPE
 CHIP_ANT_SEL:=SLNA_ANT0
 
 # Additional WiFi country code.
-BSP_DEFINES+=CY_USING_HAL CY_STORAGE_WIFI_DATA=\".cy_xip\"
+BSP_DEFINES+=CY_USING_HAL
+ifeq ($(DIRECT_LOAD), 0)
+BSP_DEFINES+=CY_STORAGE_WIFI_DATA=\".cy_xip\"
+endif
 ifeq ($(filter CY_WIFI_COUNTRY%,$(DEFINES)),)
 BSP_DEFINES+=CY_WIFI_COUNTRY='WHD_COUNTRY_UNITED_STATES'
 endif

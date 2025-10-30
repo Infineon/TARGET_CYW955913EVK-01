@@ -12,6 +12,8 @@ The CYW955913EVK-01 library includes the following:
 * API documentation
 
 ### What Changed?
+#### v3.0.0
+Updated psram support
 #### v2.0.0
 Updated dependencies for mtb-hal-cat5 and mtb-pdl-cat5.
 #### v1.0.1
